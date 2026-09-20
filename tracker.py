@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 
 FILENAME = "scholarships.csv"
 
@@ -13,9 +14,58 @@ def view_scholarships():
             return
 
         for row in rows:
+            deadline_date = datetime.strptime(row['deadline'], "%Y-%m-%d")
+            days_left = (deadline_date - datetime.today()).days           
             print("-" * 40)
             print(f"University: {row['university']}")
+            print(f"Days remaining: {days_left}")
             print(f"Status: {row['status']}")
+                  
 
 
-view_scholarships()
+
+def add_scholarship():
+    print("Enter the scholarship details below:")
+    new_entry = {
+        "university": input("University: "),
+        "country": input("Country: "),
+        "scholarship_type": input("Scholarship type: "),
+        "deadline": input("Deadline (YYYY-MM-DD): "),
+        "application_fee": input("Application fee: "),
+        "required_documents": input("Required documents: "),
+        "status": "Not Started"
+    }
+
+    with open(FILENAME, mode="a", newline="") as file:
+        fieldnames = ["university", "country", "scholarship_type", "deadline",
+                      "application_fee", "required_documents", "status"]
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writerow(new_entry)
+
+    print("Scholarship added successfully!")
+
+
+#add_scholarship()
+#view_scholarships()
+
+def main_menu():
+    while True:
+        print("\n===== Scholarship Deadline Tracker =====")
+        print("1. View scholarships")
+        print("2. Add a new scholarship")
+        print("3. Exit")
+
+        choice = input("Choose an option (1-3): ")
+
+        if choice == "1":
+            view_scholarships()
+        elif choice == "2":
+            add_scholarship()
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+
+main_menu()
