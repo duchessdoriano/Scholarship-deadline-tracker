@@ -1,5 +1,9 @@
 university,country,scholarship_type,deadline,application_fee,required_documents,status
-University of Ontario,Canada,Full Scolarship,2026-08-30,$100,Transcript,Not Started
-Uottawa,Canada,Fully Funded,2026-08-25,100,International passport,Not Started
-Uottawa,Canada,Fully funded,2026-09-29,100,All,Not Started
-uottawa,canada,Fully funded,2026-09-29,100,all,Not Started
+Chevening Scholarships,UK,Fully-funded(Any Master's),2026-10-06,Free,"Personal Statement, References, Transcript",Not Started
+Commonwealth Master's Scholarships,UK,"Fully-funded(Master's, Commonwealth citizens)",2026-10-20,Free,"Application form, Academic Transcripts, References.",Not Started
+DAAD Scholarships,Germany,Fully-funded(various programs),2026-11-15,Free,"CV, Motivation letter, Transcripts",Not Started
+MEXT Research Scholarship,Japan,Fully-funded(Research/Master's),2027-01-15,Free,"Transcript, Motivation letter, language certificate",Not Started
+Stipendium Hungaricum,Hungary,Fully-funded(Bachelor's/Master's/PhD),2027-01-15,Free,"Transcripts, Motivation letter, language certificate",Not Started
+Gates Cambridge Scholarship,UK,Fully-funded(PhD/Master's international round),2026-12-03,Free,"Cambridge course application, Research proposal, References",Not Started
+University of Ottawa,,,2026-10-02,,,Not Started
+Full Bright,United States,Fully-funded,2026-08-30,Free,"Resume, Transcript",Not Started
