@@ -10,7 +10,7 @@ st.title("Scholarship Deadline Tracker")
 # ----- Add a new scholarship -----
 st.header("Add a New Scholarship")
 
-with st.form("add_scholarship_form"):
+with st.form("add_scholarship_form", clear_on_submit=True):
     university = st.text_input("University")
     country = st.text_input("Country")
     scholarship_type = st.text_input("Scholarship type")
