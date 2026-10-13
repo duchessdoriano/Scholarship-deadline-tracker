@@ -5,6 +5,16 @@ import csv
 
 FILENAME = "scholarships.csv"
 
+STATUS_OPTIONS = [
+    "Not Started",
+    "Researching",
+    "Documents Pending",
+    "Ready to Apply",
+    "Applied",
+    "Accepted",
+    "Rejected",
+]
+
 st.title("Scholarship Deadline Tracker")
 
 # ----- Add a new scholarship -----
@@ -17,29 +27,37 @@ with st.form("add_scholarship_form", clear_on_submit=True):
     deadline = st.date_input("Deadline")
     application_fee = st.text_input("Application fee")
     required_documents = st.text_input("Required documents")
+    status = st.selectbox("Status", STATUS_OPTIONS)
 
     submitted = st.form_submit_button("Add Scholarship")
 
     if submitted:
-        new_entry = {
-            "university": university,
-            "country": country,
-            "scholarship_type": scholarship_type,
-            "deadline": deadline.strftime("%Y-%m-%d"),
-            "application_fee": application_fee,
-            "required_documents": required_documents,
-            "status": "Not Started"
-        }
+        if not university.strip():
+            st.error("University name cannot be empty.")
+        elif not country.strip():
+            st.error("Country cannot be empty.")
+        elif not application_fee.strip().replace(".", "", 1).isdigit() and application_fee.strip().lower() != "free":
+            st.error("Application fee must be a number (or 'Free').")
+        else:
+            new_entry = {
+                "university": university,
+                "country": country,
+                "scholarship_type": scholarship_type,
+                "deadline": deadline.strftime("%Y-%m-%d"),
+                "application_fee": application_fee,
+                "required_documents": required_documents,
+                "status": status
+            }
 
-        fieldnames = ["university", "country", "scholarship_type", "deadline",
-                      "application_fee", "required_documents", "status"]
+            fieldnames = ["university", "country", "scholarship_type", "deadline",
+                          "application_fee", "required_documents", "status"]
 
-        with open(FILENAME, mode="a", newline="") as file:
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-            writer.writerow(new_entry)
+            with open(FILENAME, mode="a", newline="") as file:
+                writer = csv.DictWriter(file, fieldnames=fieldnames)
+                writer.writerow(new_entry)
 
-        st.success("Scholarship added successfully!")
-        st.rerun()
+            st.success("Scholarship added successfully!")
+            st.rerun()
 
 # ----- View scholarships -----
 st.header("Your Tracked Scholarships")
