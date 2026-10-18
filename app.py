@@ -59,6 +59,19 @@ with st.form("add_scholarship_form", clear_on_submit=True):
             st.success("Scholarship added successfully!")
             st.rerun()
 
+
+def urgency_label(days):
+    if days < 0:
+        return "⚫ Deadline passed"
+    elif days <= 7:
+        return "🔴 Urgent"
+    elif days >= 8 and days <= 29:
+        return "🟠 Soon"
+    elif days >= 30 and days <= 59:
+        return "🟡 Upcoming"
+    elif days >= 60:
+        return "🟢 Plenty of Time" 
+ 
 # ----- View scholarships -----
 st.header("Your Tracked Scholarships")
 
@@ -71,3 +84,12 @@ df = df.sort_values("days_remaining").reset_index(drop=True)
 
 st.write("Sorted by urgency:")
 st.dataframe(df)
+
+#print(urgency_label(-1))
+#print(urgency_label(0))
+#print(urgency_label(7))
+#print(urgency_label(8))
+#print(urgency_label(29))
+#print(urgency_label(30))
+#print(urgency_label(59))
+#print(urgency_label(60))
